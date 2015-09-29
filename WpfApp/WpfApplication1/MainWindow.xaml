@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <TextBlock x:Name="digital1" HorizontalAlignment="Left" Margin="21,11,0,0" TextWrapping="Wrap" Text="Digital Signal" VerticalAlignment="Top"/>
+        <CheckBox x:Name="high" Content="High" HorizontalAlignment="Left" Margin="21,41,0,0" VerticalAlignment="Top" Checked="checkBox_Checked"/>
+        <CheckBox x:Name="low" Content="Low" HorizontalAlignment="Left" Margin="21,69,0,0" VerticalAlignment="Top"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="83" Margin="10,11,0,0" VerticalAlignment="Top" Width="92"/>
+
     </Grid>
 </Window>

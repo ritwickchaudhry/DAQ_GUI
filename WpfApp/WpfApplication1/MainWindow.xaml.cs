@@ -24,5 +24,15 @@ namespace WpfApplication1
         {
             InitializeComponent();
         }
+
+        private void radioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void checkBox_Checked(object sender, RoutedEventArgs e)
+        {
+        
+        }
     }
 }
