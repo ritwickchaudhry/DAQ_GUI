@@ -16,62 +16,82 @@ using System.IO.Ports;
 using System.Threading;
 
 
+
+/*class myPort
+{
+    public SerialPort port = new SerialPort();
+    public void setPortName(string name)
+    {
+        this.port.PortName = name;
+    }
+    public string Read()
+    {
+        string message = port.ReadLine();
+        return message;
+    }
+}*/
 namespace WpfApplication1
 {
-   
+
     public partial class MainWindow : Window
     {
-        SerialPort _serialport;
-        Thread serialThread;
-        static bool _continue=true;
+        TextBlock block  ;
+        
+        public static  SerialPort _serialport;
+        public static Thread _serialThread;
+
+        static bool _continue = true;
         int i = 0;
         public MainWindow()
         {
+            block = textBlock;
             InitializeComponent();
             _serialport = new SerialPort();
             _serialport.PortName = "COM3";
+           _serialThread = new Thread(ReadAndUpdate);
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(this.inputText.Text);
-            /*myTextBlock newtextblock = new myTextBlock(textBlock);
-            Thread thread = new Thread(newtextblock.execute);
-            thread.Start();*/
-
-            //serialThread = new Thread(new ThreadStart(ReadAndUpdate(textBlock, _serialport));
+            
+ 
             Thread.Sleep(1);
-                //textBlock.Text = DateTime.Now.ToString("h:mm:ss tt");
-                ReadAndUpdate(textBlock, _serialport);
-           
-
-
-
-        }
-
-        private void inputText_TextChanged(object sender, TextChangedEventArgs e)
-        {
+            //textBlock.Text = DateTime.Now.ToString("h:mm:ss tt");
+            _serialport.Open();
+            _serialThread.Start();
             
 
+
+
+
         }
-        public static void ReadAndUpdate(TextBlock textBlock ,SerialPort _serialport)
+
+        public void ReadAndUpdate()
         {
-            _serialport.Open();
-           while (_continue)
+            
+            while (_continue)
             {
                 try
                 {
                     string message = _serialport.ReadLine();
                     Console.WriteLine(message);
-                    textBlock.Text = message;
+                    
+                    Dispatcher.Invoke(() => {
+                        textBlock.Text = message;
+                    });
                 }
                 catch (TimeoutException) { }
             }
             _serialport.Close();
         }
+
+       
         
-
-
-
     }
+   
+    
 }
+
+
+
+   
