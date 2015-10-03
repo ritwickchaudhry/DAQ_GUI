@@ -21,8 +21,7 @@ namespace WpfApplication1
 
     public partial class MainWindow : Window
     {
-        TextBlock block  ;
-        
+       
         public SerialPort _serialport;
         public Thread _serialThread;
 
@@ -30,7 +29,6 @@ namespace WpfApplication1
         int i = 0;
         public MainWindow()
         {
-            block = textBlock;
             InitializeComponent();
             _serialport = new SerialPort();
             _serialport.PortName = "COM3";
@@ -41,8 +39,18 @@ namespace WpfApplication1
         {
             _continue = true;
             Thread.Sleep(1);
-            _serialport.Open();
-            _serialThread.Start();
+            try
+            {
+                _serialport.Open();
+                _serialThread.Start();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                Console.WriteLine(ex);
+            }
+            
+            
         }
         private void stopbutton_click(object sender, RoutedEventArgs e)
         {
@@ -61,8 +69,6 @@ namespace WpfApplication1
                 try
                 {
                     string message = _serialport.ReadLine();
-                    Console.WriteLine(message);
-                    
                     Dispatcher.Invoke(() => {
                         textBlock.Text = message;
                     });
