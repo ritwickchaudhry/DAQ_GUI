@@ -31,7 +31,7 @@ namespace WpfApplication1
         {
             InitializeComponent();
             _serialport = new SerialPort();
-            _serialport.PortName = "COM3";
+            _serialport.PortName = "COM1";
            _serialThread = new Thread(ReadAndUpdate);
         }
 
@@ -61,6 +61,13 @@ namespace WpfApplication1
 
         }
 
+        private void submit_Click(object sender, RoutedEventArgs e)
+        {
+            setPortName(_serialport, com_name);
+            MessageBox.Show("COM Name:"+com_name.Text);
+
+        }
+
         public void ReadAndUpdate()
         {
             
@@ -77,8 +84,15 @@ namespace WpfApplication1
             }
             _serialport.Close();
         }
+        public void setPortName(SerialPort _serialport, TextBox box)
+        {
+            _serialport.PortName = box.Text;
+        }
 
-        
+        private void Com_Name_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
    
     

@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <TextBlock x:Name="digital1" HorizontalAlignment="Left" Margin="21,11,0,0" TextWrapping="Wrap" Text="Digital Signal" VerticalAlignment="Top"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="83" Margin="10,11,0,0" VerticalAlignment="Top" Width="92"/>
-        <Button x:Name="startbutton" Content="Start" HorizontalAlignment="Left" Margin="171,56,0,0" VerticalAlignment="Top" Width="75" Click="startbutton_Click"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="318,27,0,0" TextWrapping="Wrap" Text="Textblock" VerticalAlignment="Top" Height="49" Width="99"/>
-        <Button x:Name="stopbutton" Content="stop" HorizontalAlignment="Left" Margin="171,95,0,0" VerticalAlignment="Top" Width="75" Click="stopbutton_click"/>
+        <Button x:Name="startbutton" Content="Start" HorizontalAlignment="Left" Margin="318,67,0,0" VerticalAlignment="Top" Width="75" Click="startbutton_Click"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="318,27,0,0" TextWrapping="Wrap" Text="Sensor Value" VerticalAlignment="Top" Height="49" Width="99"/>
+        <Button x:Name="stopbutton" Content="stop" HorizontalAlignment="Left" Margin="318,116,0,0" VerticalAlignment="Top" Width="75" Click="stopbutton_click"/>
+        <TextBox x:Name="com_name" HorizontalAlignment="Left" Height="23" Margin="105,27,0,0" TextWrapping="Wrap" Text="COM Name" VerticalAlignment="Top" Width="120" TextChanged="Com_Name_TextChanged"/>
+        <Button x:Name="submit" Content="Submit" HorizontalAlignment="Left" Margin="119,61,0,0" VerticalAlignment="Top" Width="75" Click="submit_Click"/>
 
     </Grid>
 </Window>
