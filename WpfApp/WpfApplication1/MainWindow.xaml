@@ -6,12 +6,17 @@
         xmlns:local="clr-namespace:WpfApplication1"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+
     <Grid>
-        <Button x:Name="startbutton" Content="Start" HorizontalAlignment="Left" Margin="318,67,0,0" VerticalAlignment="Top" Width="75" Click="startbutton_Click"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="318,27,0,0" TextWrapping="Wrap" Text="Sensor Value" VerticalAlignment="Top" Height="49" Width="99"/>
-        <Button x:Name="stopbutton" Content="stop" HorizontalAlignment="Left" Margin="318,116,0,0" VerticalAlignment="Top" Width="75" Click="stopbutton_click"/>
-        <TextBox x:Name="com_name" HorizontalAlignment="Left" Height="23" Margin="105,27,0,0" TextWrapping="Wrap" Text="COM Name" VerticalAlignment="Top" Width="120" TextChanged="Com_Name_TextChanged"/>
-        <Button x:Name="submit" Content="Submit" HorizontalAlignment="Left" Margin="119,61,0,0" VerticalAlignment="Top" Width="75" Click="submit_Click"/>
+        <Button x:Name="startbutton" Content="Start" HorizontalAlignment="Left" Margin="134,12,0,0" VerticalAlignment="Top" Width="75" Click="startbutton_Click"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="16,52,0,0" TextWrapping="Wrap" Text="Sensor Value" VerticalAlignment="Top" Height="24" Width="81"/>
+        <Button x:Name="stopbutton" Content="stop" HorizontalAlignment="Left" Margin="225,12,0,0" VerticalAlignment="Top" Width="75" Click="stopbutton_click"/>
+        <ComboBox x:Name="comboBox" Text="select"  HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Width="106" SelectionChanged="comboBox_SelectionChanged"/>
+        <Ellipse x:Name="digital_signal" Fill="#FFF12E0F" HorizontalAlignment="Left" Height="28" Margin="114,97,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" RenderTransformOrigin="-0.325,-2.079"/>
+        <ProgressBar x:Name="batteryindicator" HorizontalAlignment="Left" Height="28" Margin="376,0,0,259" VerticalAlignment="Bottom" Width="100" ValueChanged="ProgressBar_ValueChanged" RenderTransformOrigin="0.61,-0.5"/>
+        <TextBlock x:Name="battery_percentage" HorizontalAlignment="Left" Margin="414,12,0,0" TextWrapping="Wrap" Text="50%" VerticalAlignment="Top" Height="17" Width="33" RenderTransformOrigin="0.697,0.647"/>
+        <TextBlock x:Name="digital_sensor_value" HorizontalAlignment="Left" Margin="16,101,0,0" TextWrapping="Wrap" Text="Digital Sensor" VerticalAlignment="Top" Height="24" Width="81"/>
+        
 
     </Grid>
 </Window>
