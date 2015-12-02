@@ -26,17 +26,27 @@ namespace WpfApplication1
         public Thread _serialThread;
         SolidColorBrush green = (SolidColorBrush)(new BrushConverter().ConvertFrom("#ff27d116"));
         SolidColorBrush red = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFF12E0F"));
+        SolidColorBrush black = (SolidColorBrush)(new BrushConverter().ConvertFrom("#ffffffff"));
         static bool _continue = true;
         int i = 0;
         public String filename="";
         dynamic_graph graph1 = new dynamic_graph();
-
+        //senso  values declaration
+        bool mc_error = false;
+        bool bms_error = false;
+        bool bspd_error = false;
+        bool imd_error = false;
+        int speed = 0;
+        int _break = 0;
+        int throttle = 0;
+        int battery = 0;
         //main window
         public MainWindow()
         {
             InitializeComponent();
             Load_comboBox();
             Load_batteryindicator();
+            //settting serial port
             _serialport = new SerialPort();
             _serialport.PortName = "COM1";
            _serialThread = new Thread(ReadAndUpdate);
@@ -57,12 +67,12 @@ namespace WpfApplication1
             try
             {
                 _serialport.Open();
-                _serialThread.Start();
+                _serialThread.Start(); //starts thread to take serial input and update gui
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                Console.WriteLine(ex);
+                //Console.WriteLine(ex);
             }
             
             
@@ -73,14 +83,13 @@ namespace WpfApplication1
         {
             digital_signal.Fill = red;
             _continue = false;
-            _serialThread.Abort();
-            _serialThread = new Thread(ReadAndUpdate);
+            _serialThread.Abort();  //aborts previous thread
+            _serialThread = new Thread(ReadAndUpdate); //reinitialising thread
             _serialport.Close();
-            _serialport.BaudRate = 9600;
 
         }
 
-
+        //function to read serial data and update
         public void ReadAndUpdate()
         {
             
@@ -90,21 +99,22 @@ namespace WpfApplication1
                 try
                 {
                     string message = _serialport.ReadLine();
+                    //dispature used when a variable is updated by two threads
                     Dispatcher.Invoke(() => {
                         textBlock.Text = message;
-                        Speed.Text = message+"KMPH";
+                        string speed_txt = message + "(KMPH)";
+                        Speed.Text = speed_txt;
                         //Console.WriteLine(message);
                         try
                         {
                              
                             int num = Int32.Parse(message);
-                            Canvas.SetTop(pointer, -40-117.5253*Math.Sin(Math.PI*(45+num*270/255)*180));
-                            Canvas.SetLeft(pointer, 40+117.5253*Math.Cos(Math.PI*(45+num*270/255)*180));
+                            set_pointer(num);
                             if (num > 190)
                             {
                                 digital_signal.Fill = green;
                             }
-                            change_battery_level(num * 100 / 255);
+                            change_progressbar_level(num * 100 / 255);
                             //graph1.plot_data(i, num);
                         }
                         catch(Exception e)
@@ -119,22 +129,20 @@ namespace WpfApplication1
             }
             _serialport.Close();
         }
-        public void setPortName(SerialPort _serialport, TextBox box)
-        {
-            _serialport.PortName = box.Text;
-        }
-
-        private void Com_Name_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
+      
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
             ComboBoxItem port = (ComboBoxItem)comboBox.SelectedItem;
             _serialport.PortName = port.Content.ToString();
             MessageBox.Show("Port changed");
+        }
+
+        private void baudrate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem rate = (ComboBoxItem)baudrate.SelectedItem;
+            _serialport.BaudRate = Int32.Parse(rate.Content.ToString());
+            MessageBox.Show("Baudrate changed");
         }
         private void Load_comboBox()
         {
@@ -155,17 +163,21 @@ namespace WpfApplication1
             batteryindicator.Value = 50;
         }
 
-        private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            
-        }
-        private void change_battery_level(int n)
+        private void change_progressbar_level(int n)
         {
             batteryindicator.Value = n;
+            Throttle.Value = n;
+            Break.Value = n;
             battery_percentage.Text = n.ToString()+"%";
             if (n <= 20)
             {
                 batteryindicator.Foreground = red;
+
+            }
+            if (n >80)
+            {
+                Break.Foreground = red;
+                Throttle.Foreground = red;
 
             }
         }
@@ -203,13 +215,30 @@ namespace WpfApplication1
         {
             Load_comboBox();
         }
-
-        private void baudrate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void set_pointer(int speed)
         {
-            ComboBoxItem rate = (ComboBoxItem)baudrate.SelectedItem;
-            _serialport.BaudRate = Int32.Parse(rate.Content.ToString());
-            MessageBox.Show("Baudrate changed");
+            double ref_x = Canvas.GetLeft(Ellipse_1)+Ellipse_1.Width/2;
+            double ref_y = Canvas.GetTop(Ellipse_1)+Ellipse_1.Height/2;
+            double R = Ellipse_1.Height / 4+Ellipse_1.Width/4;
+            double angle;
+            double new_x=0;
+            double new_y=0;
+            //speed = 0;
+            angle=Math.PI*(30+speed*270/255)/180;
+            new_x = ref_x - R * Math.Sin(angle) - pointer.Width / 2;
+            new_y = ref_y + R *  Math.Cos(angle) - pointer.Height / 2;
+            Canvas.SetTop(pointer, new_y);
+            Canvas.SetLeft(pointer,new_x);
         }
+
+        private void Decode(string s)
+        {
+
+        }
+
+       
+
+
     }
    
     
