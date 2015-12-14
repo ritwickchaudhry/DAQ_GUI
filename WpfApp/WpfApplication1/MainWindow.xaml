@@ -16,7 +16,7 @@
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="43,333,0,0" TextWrapping="Wrap" Text="Sensor Value" VerticalAlignment="Top" Height="24" Width="81"/>
         <Button x:Name="stopbutton" Content="stop" HorizontalAlignment="Left" Margin="330,113,0,0" VerticalAlignment="Top" Width="75" Click="stopbutton_click" Height="33"/>
         <ComboBox x:Name="comboBox" Text="select"  HorizontalAlignment="Left" Margin="32,113,0,0" VerticalAlignment="Top" Width="106" SelectionChanged="comboBox_SelectionChanged" Height="33"/>
-        <Ellipse x:Name="digital_signal" Fill="#FFF12E0F" HorizontalAlignment="Left" Height="28" Margin="143,415,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" RenderTransformOrigin="-0.325,-2.079"/>
+        <Ellipse x:Name="mc_error_led" Fill="#FFF12E0F" HorizontalAlignment="Left" Height="28" Margin="143,415,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" RenderTransformOrigin="-0.325,-2.079"/>
         <ProgressBar x:Name="batteryindicator" HorizontalAlignment="Left" Height="46" Margin="1064,0,0,628" VerticalAlignment="Bottom" Width="236" RenderTransformOrigin="0.61,-0.5"/>
         <TextBlock x:Name="battery_percentage" HorizontalAlignment="Left" Margin="1162,95,0,0" TextWrapping="Wrap" Text="50%" VerticalAlignment="Top" Height="17" Width="33" RenderTransformOrigin="0.697,0.647"/>
         <TextBlock x:Name="MC_error" HorizontalAlignment="Left" Margin="32,419,0,0" TextWrapping="Wrap" Text="MC Error" VerticalAlignment="Top" Height="24" Width="81"/>
@@ -164,11 +164,11 @@
         <TextBlock x:Name="Break_txt" HorizontalAlignment="Left" Height="38" Margin="1058,601,0,0" TextWrapping="Wrap" Text="Break" VerticalAlignment="Top" Width="83" FontWeight="Bold" FontSize="26.667"/>
         <TextBlock x:Name="Throttle_txt" HorizontalAlignment="Left" Height="38" Margin="1182,601,0,0" TextWrapping="Wrap" Text="Throttle" VerticalAlignment="Top" Width="118" FontWeight="Bold" FontSize="26.667"/>
         <TextBlock x:Name="BSPD_error" HorizontalAlignment="Left" Margin="32,456,0,0" TextWrapping="Wrap" Text="BSPD Error" VerticalAlignment="Top" Height="24" Width="81"/>
-        <Ellipse x:Name="digital_signal_Copy" Fill="#FFF12E0F" HorizontalAlignment="Left" Height="28" Margin="143,452,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" RenderTransformOrigin="-0.325,-2.079"/>
+        <Ellipse x:Name="bspd_error_led" Fill="#FFF12E0F" HorizontalAlignment="Left" Height="28" Margin="143,452,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" RenderTransformOrigin="-0.325,-2.079"/>
         <TextBlock x:Name="BMS_error" HorizontalAlignment="Left" Margin="32,500,0,0" TextWrapping="Wrap" Text="BMS Error" VerticalAlignment="Top" Height="24" Width="81"/>
-        <Ellipse x:Name="digital_signal_Copy1" Fill="#FFF12E0F" HorizontalAlignment="Left" Height="28" Margin="143,496,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" RenderTransformOrigin="-0.325,-2.079"/>
+        <Ellipse x:Name="bms_error_led" Fill="#FFF12E0F" HorizontalAlignment="Left" Height="28" Margin="143,496,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" RenderTransformOrigin="-0.325,-2.079"/>
         <TextBlock x:Name="IMD_error" HorizontalAlignment="Left" Margin="32,546,0,0" TextWrapping="Wrap" Text="IMD Error" VerticalAlignment="Top" Height="24" Width="81"/>
-        <Ellipse x:Name="digital_signal_Copy2" Fill="#FFF12E0F" HorizontalAlignment="Left" Height="28" Margin="143,542,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" RenderTransformOrigin="-0.325,-2.079"/>
+        <Ellipse x:Name="imd_error_led" Fill="#FFF12E0F" HorizontalAlignment="Left" Height="28" Margin="143,542,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" RenderTransformOrigin="-0.325,-2.079"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Height="23" Margin="32,90,0,0" TextWrapping="Wrap" Text="Choose COM Port and BaudRate:" VerticalAlignment="Top" Width="180"/>
         <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Height="21" Margin="32,151,0,0" TextWrapping="Wrap" Text="   COM Port                     BaudRate" VerticalAlignment="Top" Width="202"/>
 
